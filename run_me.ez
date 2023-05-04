@@ -1,4 +1,8 @@
 save x as 10
 
-repeat 6 times
-  print x
+display 5
+display "test"
+save var as 17
+display x
+
+display var
