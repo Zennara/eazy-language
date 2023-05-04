@@ -18,8 +18,23 @@ class Interpreter:
             if line.startswith("save "):
                 if split_line[2] == "as":
                     variable_name = split_line[1]
-                    variable_value = split_line[3]
-                    self.variables[variable_name] = variable_value
+                    raw_value = split_line[3]
+                    # number
+                    if raw_value.isdigit():
+                        self.variables[variable_name] = raw_value
+                    # string
+                    elif raw_value.startswith('"') and raw_value.endswith('"'):
+                        self.variables[variable_name] = raw_value[1:-1]
+                    # variables
+                    else:
+                        if bool(re.match("[a-zA-Z_-]*$", raw_value)):
+                            if raw_value in self.variables:
+                                self.variables[variable_name] = self.variables[raw_value]
+                            else:
+                                Interpreter.error(self, "Invalid token - Incorrect variable name.")
+                        else:
+                            Interpreter.error(self,
+                                              "Invalid token - Tokens must only contain letters, underscores, or dashes.")
                 else:
                     Interpreter.error(self, "Invalid Syntax - Missing value declaration token.")
 

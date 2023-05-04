@@ -1,8 +1,9 @@
 save x as 10
+save y as "variable"
+save z as y
 
 display 5
 display "test"
-save var as 17
 display x
-
-display var
+display y
+display z
