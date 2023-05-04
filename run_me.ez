@@ -1,0 +1,4 @@
+save x as 10
+
+repeat 6 times
+  print x
