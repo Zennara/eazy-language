@@ -1,7 +1,2 @@
 save x as 0
 save y as 1
-
-repeat forever
-save x as x+1
-display x
-end repeat

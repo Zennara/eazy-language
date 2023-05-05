@@ -4,9 +4,10 @@ import re
 class Interpreter:
     def __init__(self):
         self.variables = {}
+        self.line_number = 0
 
     def error(self, message):
-        exit("\n" + message)
+        exit(f"{message}\nLine: {self.line_number}")
 
     def evaluate(self, arithmetic):
         code = ""
@@ -26,6 +27,8 @@ class Interpreter:
         repeat_type = None
 
         for line in lines:
+            self.line_number += 1
+
             split_line = re.split(r' \s*(?=(?:[^"]*"[^"]*")*[^"]*$)', line)
 
             if saving and not line.startswith("end"):
