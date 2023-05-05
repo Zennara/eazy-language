@@ -5,14 +5,14 @@ class Interpreter:
         self.variables = {}
 
     def error(self, message):
-        print("\n"+message)
+        exit("\n"+message)
 
     def interpret(self, code):
         valid_characters = "abcdefghijklmnopqrstuvqxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"
         lines = code.split("\n")
 
         for line in lines:
-            split_line = line.split(' ')
+            split_line = re.split(r' \s*(?=(?:[^"]*"[^"]*")*[^"]*$)', line)
 
             # storing variable
             if line.startswith("save "):
