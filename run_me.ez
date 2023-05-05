@@ -1,8 +1,9 @@
 save x as 15
 save y as 10
-
 save z as 2+(x-y)
 
 display x
 display y
 display z
+
+display z*2-5

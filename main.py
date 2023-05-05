@@ -8,8 +8,13 @@ class Interpreter:
     def error(self, message):
         exit("\n" + message)
 
+    def evaluate(self, arithmetic):
+        for variable in self.variables:
+            if variable in arithmetic:
+                arithmetic = arithmetic.replace(variable, str(self.variables[variable]))
+        return eval(arithmetic)
+
     def interpret(self, code):
-        valid_characters = "abcdefghijklmnopqrstuvqxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"
         tokens = ['save', 'as', 'if', 'equals', 'above', 'below', 'repeat', 'forever', 'until', 'times', 'and', 'or',
                   'and', 'display', 'otherwise', 'stop']
         lines = code.split("\n")
@@ -38,14 +43,16 @@ class Interpreter:
                             self.variables[variable_name] = raw_value[1:-1]
                         # variables
                         else:
+                            # just variable
                             if bool(re.match("[a-zA-Z_-]*$", raw_value)):
                                 if raw_value in self.variables:
                                     self.variables[variable_name] = self.variables[raw_value]
                                 else:
                                     Interpreter.error(self, "Invalid token - Incorrect variable name.")
                             else:
-                                Interpreter.error(self,
-                                                  "Invalid token - Tokens must only contain letters, underscores, or dashes.")
+                                solution = Interpreter.evaluate(self, raw_value)
+                                self.variables[variable_name] = solution
+                                #Interpreter.error(self, "Invalid token - Tokens must only contain letters, underscores, or dashes.")
                     else:
                         Interpreter.error(self, "Invalid token - Invalid variable name.")
                 else:
@@ -67,8 +74,8 @@ class Interpreter:
                         else:
                             Interpreter.error(self, "Invalid token - Incorrect variable name.")
                     else:
-                        Interpreter.error(self,
-                                          "Invalid token - Tokens must only contain letters, underscores, or dashes.")
+                        solution = Interpreter.evaluate(self, split_line[1])
+                        print(solution)
 
             # loops
             elif line.startswith("repeat "):
@@ -83,7 +90,6 @@ class Interpreter:
                         saving = True
                     else:
                         Interpreter.error(self, "Invalid token - Disallowed repeat amount")
-
 
             # end if, repeat, etc
             elif line.startswith("end "):
