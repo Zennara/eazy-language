@@ -61,7 +61,7 @@ class Interpreter:
                     print(split_line[1][1:-1])
                 # variable
                 else:
-                    if bool(re.match("[a-zA-Z_-]*$", split_line[1])):
+                    if bool(re.match("[a-zA-Z_]*$", split_line[1])):
                         if split_line[1] in self.variables:
                             print(self.variables[split_line[1]])
                         else:
@@ -83,6 +83,7 @@ class Interpreter:
                         saving = True
                     else:
                         Interpreter.error(self, "Invalid token - Disallowed repeat amount")
+
 
             # end if, repeat, etc
             elif line.startswith("end "):

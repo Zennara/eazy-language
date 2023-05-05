@@ -1,9 +1,8 @@
-save x as 10
+save x as 15
+save y as 10
+
+save z as 2+(x-y)
 
 display x
-
-repeat 3 times
-display 14
-end repeat
-
-display x
+display y
+display z
