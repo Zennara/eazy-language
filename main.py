@@ -1,4 +1,5 @@
 import re
+import sys
 
 class Interpreter:
     def __init__(self):
@@ -104,6 +105,10 @@ class Interpreter:
             elif line.startswith("input"):
                 interpreter.get_user_input()
 
+            # if
+            elif line.startswith("if "):
+                pass
+
             # end if, repeat, etc
             elif line.startswith("end "):
                 if split_line[1] == "repeat":
@@ -117,7 +122,7 @@ class Interpreter:
                             interpreter.interpret(saved_lines)
 
 
-f = open('run_me.ez', encoding="utf-8")  # open json file
+f = open(sys.argv[1], encoding="utf-8")  # open json file
 code = f.read()
 f.close()  # close file
 

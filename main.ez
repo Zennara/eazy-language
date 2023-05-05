@@ -1,0 +1,10 @@
+display "program to add two numbers"
+
+display "enter first number:"
+save first as input
+
+display "enter second number:"
+save second as input
+
+save result as first+second
+display result

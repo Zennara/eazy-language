@@ -1,5 +1,0 @@
-display "enter a value:"
-
-save x as input
-
-display x+2
