@@ -1,2 +1,5 @@
-save x as 0
-save y as 1
+display "enter a value:"
+
+save x as input
+
+display x+2

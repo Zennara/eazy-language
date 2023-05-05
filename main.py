@@ -1,6 +1,5 @@
 import re
 
-
 class Interpreter:
     def __init__(self):
         self.variables = {}
@@ -13,14 +12,15 @@ class Interpreter:
         code = ""
         for variable in self.variables:
             code += f"{variable} = {self.variables[variable]}\n"
-            #if variable in arithmetic:
-                #arithmetic = arithmetic.replace(variable, str(self.variables[variable]))
         exec(code)
         return eval(arithmetic)
 
+    def get_user_input(self):
+        return input()
+
     def interpret(self, code):
         tokens = ['save', 'as', 'if', 'equals', 'above', 'below', 'repeat', 'forever', 'until', 'times', 'and', 'or',
-                  'and', 'display', 'otherwise', 'stop']
+                  'and', 'display', 'otherwise', 'stop', 'input']
         lines = code.split("\n")
         saved_lines = ""
         saving = False
@@ -47,6 +47,9 @@ class Interpreter:
                         # string
                         elif raw_value.startswith('"') and raw_value.endswith('"'):
                             self.variables[variable_name] = raw_value[1:-1]
+                        # input
+                        elif raw_value == "input":
+                            self.variables[variable_name] = interpreter.get_user_input()
                         # variables
                         else:
                             # just variable
@@ -96,6 +99,10 @@ class Interpreter:
                         saving = True
                     else:
                         Interpreter.error(self, "Invalid token - Disallowed repeat amount")
+
+            # input
+            elif line.startswith("input"):
+                interpreter.get_user_input()
 
             # end if, repeat, etc
             elif line.startswith("end "):
