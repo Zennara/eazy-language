@@ -1,9 +1,9 @@
 save x as 10
-save y as "variable"
-save z as y
+save testif as "variable"
+save z as testif
 
 display 5
 display "test"
 display x
-display y
+display testif
 display z
