@@ -1,9 +1,9 @@
 save x as 10
-save testif as "variable"
-save z as testif
 
-display 5
-display "test"
 display x
-display testif
-display z
+
+repeat 3 times
+display 14
+end repeat
+
+display x
