@@ -9,9 +9,12 @@ class Interpreter:
         exit("\n" + message)
 
     def evaluate(self, arithmetic):
+        code = ""
         for variable in self.variables:
-            if variable in arithmetic:
-                arithmetic = arithmetic.replace(variable, str(self.variables[variable]))
+            code += f"{variable} = {self.variables[variable]}\n"
+            #if variable in arithmetic:
+                #arithmetic = arithmetic.replace(variable, str(self.variables[variable]))
+        exec(code)
         return eval(arithmetic)
 
     def interpret(self, code):
@@ -50,7 +53,7 @@ class Interpreter:
                                 else:
                                     Interpreter.error(self, "Invalid token - Incorrect variable name.")
                             else:
-                                solution = Interpreter.evaluate(self, raw_value)
+                                solution = interpreter.evaluate(raw_value)
                                 self.variables[variable_name] = solution
                                 #Interpreter.error(self, "Invalid token - Tokens must only contain letters, underscores, or dashes.")
                     else:
@@ -74,7 +77,7 @@ class Interpreter:
                         else:
                             Interpreter.error(self, "Invalid token - Incorrect variable name.")
                     else:
-                        solution = Interpreter.evaluate(self, split_line[1])
+                        solution = interpreter.evaluate(split_line[1])
                         print(solution)
 
             # loops

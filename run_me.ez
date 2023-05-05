@@ -1,9 +1,7 @@
-save x as 15
-save y as 10
-save z as 2+(x-y)
+save x as 0
+save y as 1
 
+repeat 3 times
+save x as x+1
 display x
-display y
-display z
-
-display z*2-5
+end repeat
