@@ -98,14 +98,13 @@ class Interpreter:
             elif line.startswith("end "):
                 if split_line[1] == "repeat":
                     saving = False
-                    interpreter_repeat = Interpreter()
 
                     if repeat_type == "forever":
                         while True:
-                            interpreter_repeat.interpret(saved_lines)
+                            interpreter.interpret(saved_lines)
                     elif repeat_type.isdigit():
                         for x in range(0, int(repeat_type)):
-                            interpreter_repeat.interpret(saved_lines)
+                            interpreter.interpret(saved_lines)
 
 
 f = open('run_me.ez', encoding="utf-8")  # open json file
